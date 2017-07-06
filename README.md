@@ -10,7 +10,7 @@ In a linux terminal:
 
 2) To execute the program it is necessary the configuration file, in.dat.
 
-file information                                        example
+#file information                                        example
 
 name of the fcs file                                    Sample_38.fcs
 number of data columns in the fcs file                  11
