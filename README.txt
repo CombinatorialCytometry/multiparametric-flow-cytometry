@@ -31,3 +31,13 @@ Fluorescent channels used in the color trend            0 0 0 0 0 0 0
 
 
 The cytometry files must be present in the executable folder.
+
+
+Dependencies:
+
+1 - This software was build to run in Linux based systems;
+2 - gfortran compiler;
+3 - gnuplot;
+4 - R compiler;
+5 - the R package flowcore;
+
