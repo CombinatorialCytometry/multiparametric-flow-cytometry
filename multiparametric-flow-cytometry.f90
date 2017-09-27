@@ -1,7 +1,13 @@
+! 
+! analised_colors......the colors that are going to be taken into account in the tendency 
+! use_in_average..=..0 that color is not used in the average calculation
+!               .....1 the i color is used to calculate the color tendency
+!
+!
+!
+!
 program cytocolor
 implicit none
-
-
 
 ! Variables declaration *************************************************************************************************
 ! File names and temporary files
@@ -10,8 +16,9 @@ character:: anything*20,command*100,line*1000
 integer:: rad_name,number_rows_original_file=0
 
 ! Events and couter variables
-integer:: control=0,counter,positive_control
+integer:: control=0,counter,event_accepted
 integer:: i,j,k
+integer:: total_events_accepted=0, total_events_rejected=0
 
 ! file rows informations 
 integer:: rows,fluorescent_channels,color_begin,number_color_analysed
@@ -22,11 +29,28 @@ real:: average_l,sum_x,sum_y,hue_med,light_med
 real:: total_light,max_light
 
 real,allocatable:: values(:,:),average(:),in_data(:)
-integer,allocatable:: lambda(:),cores_analisadas(:),analisa(:),choosen_rows(:)
+integer,allocatable:: lambda(:),analised_colors(:),use_in_average(:),choosen_rows(:)
 real,allocatable:: hue(:),light(:),compensation(:,:)
 
-! Reading the parameters file *******************************************************************************************
+! Deleting old output files **********************************************************************************************
+file_name=" "
+file_name(1:8)="nofl.dat"
+inquire( file=trim(file_name), exist=file_fcs_exist )
+if(file_fcs_exist)call system("rm nofl.dat")
+file_name=" "
+file_name(1:8)="fluo.dat"
+inquire( file=trim(file_name), exist=file_fcs_exist )
+if(file_fcs_exist)call system("rm fluo.dat")
+file_name=" "
+file_name(1:8)="toto.eps"
+inquire( file=trim(file_name), exist=file_fcs_exist )
+if(file_fcs_exist)call system("rm toto.eps")
+file_name=" "
+file_name(1:8)="toto-deb.eps"
+inquire( file=trim(file_name), exist=file_fcs_exist )
+if(file_fcs_exist)call system("rm toto-deb.eps")
 
+! Reading the parameters file *******************************************************************************************
 open(20,file="in.dat")
 file_name=" "
 command=" "
@@ -125,8 +149,8 @@ call system(command)
 close(40)
 call system("rm toto")
 close(30)
-!reopening the file ***************************************************************************************************
 
+!reopening the files ***************************************************************************************************
 open(30,file=file_name_txt)
 open(40,file=file_name_dat)
 do while(control==0)
@@ -152,15 +176,15 @@ close(40)
 allocate(lambda(fluorescent_channels),hue(fluorescent_channels),light(fluorescent_channels))
 allocate(compensation(fluorescent_channels,fluorescent_channels))
 read(20,*,ERR=1004,END=1004)lambda
-allocate(average(fluorescent_channels),cores_analisadas(fluorescent_channels))
-allocate(analisa(fluorescent_channels))
+allocate(average(fluorescent_channels),analised_colors(fluorescent_channels))
+allocate(use_in_average(fluorescent_channels))
 read(20,*,ERR=1004,END=1004)average
 do i=1,fluorescent_channels
   read(20,*,ERR=1004,END=1004)compensation(i,1:fluorescent_channels)
   compensation(i,i)=0.0
 end do
-cores_analisadas=0
-read(20,*,ERR=1004)cores_analisadas
+analised_colors=0
+read(20,*,ERR=1004)analised_colors
 close(20)
 
 ! Final in.dat reading ************************************************************************************************ 
@@ -178,7 +202,7 @@ write(*,*)"what row in the file the color begins: ",color_begin,"...............
 write(*,'((a40),10(f10.2,3x)$)')"The negative background cut-off values:",average
 write(*,*)"The input fcs data file:",file_name_dat,".............................." 
 
-! counting the total number of events*************************************************************************************
+! counting the total number of events *************************************************************************************
 write(*,*)"Counting the number of events...................................." 
 open(10,file=file_name_dat)
 counter=0
@@ -220,7 +244,7 @@ do i=1,counter
   end do
 end do
 write(*,*)"................................................................." 
-!Removing the background values of the data
+! Removing the background values of the data *******************************************************************************
 write(*,*)"Removing the background cut-off value:",average,"......................." 
 do i=1,counter
   do j=1,fluorescent_channels
@@ -232,7 +256,7 @@ do i=1,counter
 end do
 where(values<0.0)values=0.0
 write(*,*)"................................................................." 
-! Saving the compensated data for other analisys
+! Saving the compensated data for other analisys ***************************************************************************
 file_name(rad_name+1:rad_name+8)='-cmp.dat'
 write(*,*)"Salving the compensated data: ",file_name,"......................." 
 open(10,file=file_name)
@@ -245,7 +269,7 @@ write(*,*)"................................................................."
 ! Building the base vectors
 write(*,*)" Building the base vectors......................................." 
 do j=1,fluorescent_channels
-  hue(j)=((750.0-lambda(j))*3.14)/(750.0-500.0)
+  hue(j)=((750.0-lambda(j))*(6.2830))/(750.0-400.0)
 end do
 write(*,*)"hue:",hue
 write(*,*)"hue:",hue/6.2830*360
@@ -258,15 +282,15 @@ open(20,file="fluo.dat")
 
 number_color_analysed = 0
 do i=1,fluorescent_channels
-   if(cores_analisadas(i)/=0)number_color_analysed=number_color_analysed+1
+   if(analised_colors(i)/=0)number_color_analysed=number_color_analysed+1
 end do
 write(*,*)"Number of colors excluded in the color tendency:", number_color_analysed
-write(*,*)"List of colors removed from the tendency:", cores_analisadas
-analisa=1
+write(*,*)"List of colors removed from the tendency:", analised_colors
+use_in_average=1
 do i=1,fluorescent_channels
-  if(cores_analisadas(i)/=0)analisa(cores_analisadas)=0
+  if(analised_colors(i)/=0)use_in_average(abs(analised_colors(i)))=0
 end do
-write(*,*)"vetor analisa:", analisa
+write(*,*)"vetor use_in_average:", use_in_average
 
 ! Colour calculation of each event ********************************************************************************
 write(*,*)"Please wait the calculation.............................................."
@@ -306,22 +330,23 @@ do i=1,counter
 
     if(light_med<=1.0d-5.or.isnan(hue_med))then
       write(30,*)values(i,1:color_begin),hue_med,1.0,0.5,values(i,color_begin:rows)
+      total_events_rejected = total_events_rejected + 1
     else
       if(isnan(hue_med))then
       else
         write(20,*)values(i,1:color_begin),hue_med,1.0,0.5,max_light/total_light,values(i,color_begin:rows)
+        total_events_accepted = total_events_accepted + 1
       end if
     end if
   else
-    ! caso exista uma ou mais fluorescent_channels retiradas da tendencia
-    ! 
+    ! one or more fluorescent_channels beeing analised
     average_l=0.0
     do j=1,fluorescent_channels
-       average_l = average_l + values(i,color_begin+j)*analisa(j)
+       average_l = average_l + values(i,color_begin+j)*use_in_average(j)
     end do
     average_l = average_l/real(fluorescent_channels-number_color_analysed+1) 
     do j=1,fluorescent_channels
-       light(j) = values(i,j+color_begin)*analisa(j)
+       light(j) = values(i,j+color_begin)*use_in_average(j)
     end do
     sum_x=0.0
     sum_y=0.0
@@ -338,26 +363,34 @@ do i=1,counter
       hue_med = hue_med - 6.2830
     end do
     hue_med = (hue_med/6.2830) * 360
-    ! teste se é positive_control para todas as fluorescent_channels analisadas
-    positive_control=1
+    ! the new test: if the analised_colors is positive test for positive if the analised is negative test for negative 
+    event_accepted=1
     do k=1,fluorescent_channels
-      if(cores_analisadas(k)/=0)then
-        if(values(i,color_begin+cores_analisadas(k))<=0.0)then
-          positive_control=0
+      if(analised_colors(k)>0)then
+        if(values(i,color_begin+analised_colors(k))<=0.0)then
+          event_accepted=0
+        end if
+      else
+        if(analised_colors(k)<0)then
+          if(values(i,color_begin+abs(analised_colors(k)))>0.0)then
+            event_accepted=0
+          end if
         end if
       end if
     end do
     max_light=0.0
     total_light=0.0
     do j=1,fluorescent_channels
-      if((values(i,color_begin+j)*analisa(j))>max_light)max_light=(values(i,color_begin+j)*analisa(j))
-      total_light=total_light+(values(i,color_begin+j)*analisa(j))
+      if((values(i,color_begin+j)*use_in_average(j))>max_light)max_light=(values(i,color_begin+j)*use_in_average(j))
+      total_light=total_light+(values(i,color_begin+j)*use_in_average(j))
     end do
     if(total_light<=0.0)total_light=1.0 
-    if(positive_control==0.or.isnan(hue_med))then
+    if(event_accepted==0.or.isnan(hue_med))then
       write(30,*)values(i,1:color_begin),hue_med,1.0,0.5,values(i,color_begin:rows)
+      write(*,*)values(1:colunas)
     else
       write(20,*)values(i,1:color_begin),hue_med,1.0,0.5,max_light/total_light,values(i,color_begin:rows)
+      write(*,*)values(1:colunas)
     end if
   end if
 end do
@@ -373,6 +406,7 @@ write(*,*)"................................................................."
 write(*,*)"Genetaring the images ..........................................."
 write(*,*)" Press any key to continue"
 call system("gnuplot script-gnu-cor")
+call system("gnuplot script-gnu-pb")
 deallocate(values)
 print *, ''//achar(27)//"[95m .......................THE......END.............................. "//achar(27)//"[0m"
 print *, ''//achar(27)//"[95m ...........Execution finished with success!!!.................... :)"//achar(27)//"[0m"
