@@ -6,7 +6,7 @@
 !
 !
 !
-program multiparametric-flow-cytometry
+program multiparametric_flow_cytometry
 implicit none
 
 ! Variables declaration *************************************************************************************************
@@ -42,13 +42,13 @@ file_name(1:8)="fluo.dat"
 inquire( file=trim(file_name), exist=file_fcs_exist )
 if(file_fcs_exist)call system("rm fluo.dat")
 file_name=" "
-file_name(1:8)="toto.eps"
+file_name(1:16)="result_file.eps"
 inquire( file=trim(file_name), exist=file_fcs_exist )
-if(file_fcs_exist)call system("rm toto.eps")
+if(file_fcs_exist)call system("rm result_file.eps")
 file_name=" "
-file_name(1:8)="toto-deb.eps"
+file_name(1:19)="result_file-deb.eps"
 inquire( file=trim(file_name), exist=file_fcs_exist )
-if(file_fcs_exist)call system("rm toto-deb.eps")
+if(file_fcs_exist)call system("rm result_file-deb.eps")
 
 ! Reading the parameters file *******************************************************************************************
 open(20,file="in.dat")
@@ -89,7 +89,7 @@ call system(command)
 print *, ''//achar(27)//"[32m File.... ",file_name(1:rad_name),".fcs sucessufully converted"//achar(27)//"[0m"
 
 open(30,file=file_name_txt)
-open(40,file="toto")
+open(40,file="result_file")
 line=''
 read(30,'(a1000)',END=100,ERR=200)line
 write(*,*)"Temporary text file:",file_name_txt,"................................."
@@ -144,10 +144,10 @@ print *, ''//achar(27)//"[31m There was an error in the ",file_name_txt,".fcs"//
 print *, ''//achar(27)//"[31m Please check your fcs file and your instalation..................."//achar(27)//"[0m"
 stop
 100 print *, ''//achar(27)//"[32m The text file is done ........................................ :)"//achar(27)//"[0m"
-command="cp toto "//file_name_txt
+command="cp result_file "//file_name_txt
 call system(command)
 close(40)
-call system("rm toto")
+call system("rm result_file")
 close(30)
 
 !reopening the files ***************************************************************************************************
@@ -387,10 +387,10 @@ do i=1,counter
     if(total_light<=0.0)total_light=1.0 
     if(event_accepted==0.or.isnan(hue_med))then
       write(30,*)values(i,1:color_begin),hue_med,1.0,0.5,values(i,color_begin:rows)
-      write(*,*)values(1:colunas)
+      !write(*,*)values(1:color_begin)
     else
       write(20,*)values(i,1:color_begin),hue_med,1.0,0.5,max_light/total_light,values(i,color_begin:rows)
-      write(*,*)values(1:colunas)
+      !write(*,*)values(1:color_begin)
     end if
   end if
 end do
@@ -411,9 +411,6 @@ deallocate(values)
 print *, ''//achar(27)//"[95m .......................THE......END.............................. "//achar(27)//"[0m"
 print *, ''//achar(27)//"[95m ...........Execution finished with success!!!.................... :)"//achar(27)//"[0m"
 end program
-
-
-
 
 
 
