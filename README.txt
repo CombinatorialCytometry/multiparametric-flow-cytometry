@@ -18,7 +18,7 @@ In a linux terminal:
 4) columns to copy into memory                             1 5 6 7 9 10 11 12 13 14 15
 first the fsc, ssc and additional data
 after the fluorescent channel
-5) wavelenght values for the channel colors                425 475 525 575 625 675 725
+5) wavelength values for the channel colors                425 475 525 575 625 675 725
 6) Background values                                       20.4  1000.0  12.09  19.33  1000.0  24.01  12.53
 7) Compensation values                                     100.00    1.63     6.10    0.00    0.70    0.00    0.00
                                                             22.36  100.00     6.50    0.00    0.00    0.00    0.00
@@ -34,8 +34,8 @@ The in.dat must have this informations in order without any other text;
 2, 3 and 4) to discover the number of columns of the fcs file just execute the program with the in.dat file incomplete
 and choose from the options displayed by the program output. The counting star in 1 (sorry for that C programmers!!!).
 
-5) the wavelenght value must be in [400, 750]nm, the values can be related or not with the real filters  values. If you 
-choose to not use the filter half value, we suggest to use wavelenght values equally spaced. Like the example.
+5) the wavelength value must be in [400, 750]nm, the values can be related or not with the real filters  values. If you 
+choose to not use the filter half value, we suggest to use wavelength values equally spaced. Like the example.
 
 6) The background value is the fluorescence intensity to consider the event as a positive one for the channel.
 This value must be in agreement with the data.
