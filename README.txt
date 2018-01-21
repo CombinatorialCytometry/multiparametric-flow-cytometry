@@ -1,6 +1,8 @@
 # multiparametric-flow-cytometry
 developed by Carine P. Beatrici
 
+For a tutorial read the multiparametric-flow-cytometry.pdf. 
+
 
 How to use the program:
 
