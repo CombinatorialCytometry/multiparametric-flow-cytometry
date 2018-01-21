@@ -6,7 +6,7 @@
 !
 !
 !
-program cytocolor
+program multiparametric-flow-cytometry
 implicit none
 
 ! Variables declaration *************************************************************************************************
