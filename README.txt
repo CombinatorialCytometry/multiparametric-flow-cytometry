@@ -1,16 +1,16 @@
 # multiparametric-flow-cytometry
 developed by Carine P. Beatrici
 
-For a tutorial read the multiparametric-flow-cytometry.pdf. 
+Detailed tutorial is available in the document multiparametric-flow-cytometry.pdf. 
 
 
-How to use the program:
+How to run the program:
 
 In a linux terminal:
 
-1) After the download, compile the code "make"; 
+1) After the download, compile the code using "make"; 
 
-2) To execute the program it is necessary the configuration file, in.dat.
+2) To execute the program, it is necessary to provide the configuration file in.dat.
 
 #file information                                        example
 
@@ -32,38 +32,41 @@ after the fluorescent channel
 8) Fluorescent channels used in the color trend            0 0 0 0 0 0 0
 
 Helpful observations:
-The in.dat must have this informations in order without any other text;
-2, 3 and 4) to discover the number of columns of the fcs file just execute the program with the in.dat file incomplete
-and choose from the options displayed by the program output. The counting star in 1 (sorry for that C programmers!!!).
+The in.dat must have the above informations in order without any other text;
 
-5) the wavelength value must be in [400, 750]nm, the values can be related or not with the real filters  values. If you 
-choose to not use the filter half value, we suggest to use wavelength values equally spaced. Like the example.
+For itens 2, 3 and 4), to discover the number of columns of the fcs file just execute the program with the in.dat
+file incomplete and choose from the options displayed by the program output. The counting starts in 1 
+(sorry for that C programmers!!!).
+
+5) the wavelength value must be between [400, 750] nm, the values can be related or not with real filters
+values. If you choose to not use the filter half value, we suggest using wavelength values equally spaced
+like the example shown above.
 
 6) The background value is the fluorescence intensity to consider the event as a positive one for the channel.
 This value must be in agreement with the data.
 
-7) The tradiotional compensation table. The values must be in [0,100] and 100 for the channel with itself.
+7) The traditional compensation table. The values must be between [0,100] and 100 for the channel with itself.
 
-8) To calculate the color tendency for all the channels, let this value as zeros (one zero for each color channel) or
-complete with the sequence until the number of channels (e.g 1 2 3 4 5 6). This way all the channels are taken into 
-account to the tendency color.
+8) To calculate the color tendency for all the channels, set this value as zeros (one zero for each color channel) or
+complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). This way all the channels are taken into 
+account to define the tendency color.
 
-To calculate the tendency only for events positive for just a set of channels put their numbers 
+To calculate the tendency only for events positive for a subset of channels type the corresponding channel numbers 
 followed by zeros, e.g. 2 4 0 0 0 0.  In this case only the double positives events for the second and fourth 
 channels will receive a color, all the other are going to stay black.
 
 And to calculate the tendency for the negative events for a set of channels just put the number of channels
-in negative, e.g 2 -4 0 0 0 0. With this configuration the events are going to receive a color if and only if thei are
-positive for the second channel and negative for the fourth channel.
+as negative numerals, e.g 2 -4 0 0 0 0. With this configuration the events are going to receive a color if and only if
+they are positive for the second channel and negative for the fourth channel.
 
 
 
-The cytometry files must be present in the executable folder.
+The cytometry files must be present in the same folder as the executable file.
 
 
 Dependencies:
 
-1 - This software was build to run in Linux based systems;
+1 - This software was developed to run in Linux based systems;
 2 - gfortran compiler;
 3 - gnuplot;
 4 - R compiler;
