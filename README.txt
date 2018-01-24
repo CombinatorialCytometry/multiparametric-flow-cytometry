@@ -72,3 +72,20 @@ Dependencies:
 4 - R compiler;
 5 - the R package flowcore;
 
+
+Files in this package:
+
+Makefile --------------------------- compiles the code into the executable file.
+Sample_37.fcs ---------------------- It is one of the flow cytometry experimental data used as example.
+Sample_39.fcs ---------------------- It is one of the flow cytometry experimental data used as example.
+in.dat ----------------------------- The configuration file. The multiparametric-flow-cytometry will make the color dot-plot
+                                     according to this configurations such as FCS file, number of channels. This example
+                                     uses the Sample_39.fcs as data source.
+in_Sample_37.dat ------------------- Another example of configuration file, this time using the Sample_37.fcs file.
+multiparametric-flow-cytometry.f90 - The fortran program that makes the colored dot-plot.
+multiparametric-flow-cytometry.pdf - The tutorial of the program.
+script-gnu-cor --------------------- Gnuplot script, this script uses the information in the temporary files to generate the
+                                     colored dot-plot.
+script-gnu-pb ---------------------- Gnuplot script, this script generates the trust map of the colored dot-plot.
+
+
