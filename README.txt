@@ -75,6 +75,8 @@ Dependencies:
 
 Files in this package:
 
+FCS2CSV.R -------------------------- R script that converts the FCS into the text format
+                                     used internally by the multiparametric-flow-cytometry.
 Makefile --------------------------- compiles the code into the executable file.
 Sample_37.fcs ---------------------- It is one of the flow cytometry experimental data used
                                      as example.
