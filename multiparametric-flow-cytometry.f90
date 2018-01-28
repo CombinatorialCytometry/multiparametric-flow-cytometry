@@ -211,6 +211,11 @@ do while(control==0)
   counter=counter+1
 end do
 20 continue
+if (counter == 0) then
+  print *, ''//achar(27)//"[31m ERROR: There are no events in the file",file_name,".fcs !!!!!!!!!"//achar(27)//"[0m"
+  print *, ''//achar(27)//"[31m Please check the script FCS2CSV.R and the FCS file"//achar(27)//"[0m"
+  stop
+end if
 if (counter<=20000) then
   print *, ''//achar(27)//"[32m Number of events in the file .......",counter," "//achar(27)//"[0m"
 else
