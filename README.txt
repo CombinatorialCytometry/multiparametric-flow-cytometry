@@ -34,8 +34,8 @@ after the fluorescence channel
 Helpful observations:
 The in.dat must have the above informations in order without any other text;
 
-For itens 2, 3 and 4, to discover the number of columns of the fcs file, just execute the program with the in.dat
-file incomplete and choose from the options displayed by the program output. The counting starts in 1.
+For itens 2, 3 and 4, to discover the number of columns of the fcs file, just execute the program with the 
+in.dat file incomplete and choose from the options displayed by the program output. The counting starts in 1.
 
 5) the wavelength value must be between [400, 750] nm and the values can be related or not to real filters
 values. If you choose not to use the filter half value, we suggest to use wavelength values equally spaced
