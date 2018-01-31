@@ -81,9 +81,9 @@ Sample_37.fcs ---------------------- It is one of the flow cytometry experimenta
                                      as example (control group of mice).
 Sample_39.fcs ---------------------- It is one of the flow cytometry experimental data used
                                      as example (infected group of mice).
-in.dat ----------------------------- This configuration file uses the Sample_39.fcs as data source. The multiparametric-flow-                                                cytometry application will generate the color dot-plot according to this 
-                                     configuration file. 
-                                     
+in.dat ----------------------------- This configuration file uses the Sample_39.fcs as data source. 
+                                     The multiparametric-flow-cytometry application will generate the color dot-plot according to this 
+                                     configuration file.    
 in_Sample_37.dat ------------------- Another example of configuration file, this time using 
                                      the Sample_37.fcs as imput file.
 multiparametric-flow-cytometry.f90 - The fortran program that generates the colored dot-plot.
