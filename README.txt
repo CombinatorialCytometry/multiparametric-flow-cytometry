@@ -47,8 +47,8 @@ This value must be in agreement with the data.
 7) The conventional compensation table. The values must be between [0,100] and the value 100 is set when the same channel is considered for both references.
 
 8) To calculate the color tendency for all the channels, set this value as zeros (one zero for each color channel) or
-complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). By doing this, all the channels are taken into 
-account to define the tendency color.
+complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). 
+By doing this, all the channels are taken into account to define the tendency color.
 
 To calculate the tendency value only for positive events for a subset of channels, type the corresponding channel numbers 
 followed by zeros, e.g. 2 4 0 0 0 0. In this case, only the double positives events for the second and fourth 
