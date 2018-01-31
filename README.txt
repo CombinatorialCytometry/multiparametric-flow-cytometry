@@ -50,8 +50,8 @@ This value must be in agreement with the data.
 complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). 
 By doing this, all the channels are taken into account to define the tendency color.
 
-To calculate the tendency value only for positive events for a subset of channels, type the corresponding channel numbers 
-followed by zeros, e.g. 2 4 0 0 0 0. In this case, only the double positives events for the second and fourth 
+To calculate the tendency value only for positive events for a subset of channels, type the corresponding 
+channel numbers followed by zeros, e.g. 2 4 0 0 0 0. In this case, only the double positives events for the second and fourth 
 channels will be considered and will receive a color, all the others are going to stay black.
 
 To calculate the tendency value for negative events in a set of channels, just put the number of channels
