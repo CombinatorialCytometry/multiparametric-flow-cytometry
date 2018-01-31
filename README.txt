@@ -19,7 +19,7 @@ In a linux terminal:
 3) number of fluorescent channels                     7
 4) columns to copy into memory                        1 5 6 7 9 10 11 12 13 14 15
 first the fsc, ssc and additional data
-after the fluorescent channel
+after the fluorescence channel
 5) wavelength values for the channel colors           425 475 525 575 625 675 725
 6) Background values                                   20.4  1000.0  12.09  19.33  1000.0  24.01  12.53
 7) Compensation values                 100.00    1.63     6.10    0.00    0.70    0.00    0.00
@@ -34,30 +34,29 @@ after the fluorescent channel
 Helpful observations:
 The in.dat must have the above informations in order without any other text;
 
-For itens 2, 3 and 4), to discover the number of columns of the fcs file just execute the program with the in.dat
-file incomplete and choose from the options displayed by the program output. The counting starts in 1 
-(sorry for that C programmers!!!).
+For itens 2, 3 and 4, to discover the number of columns of the fcs file, just execute the program with the in.dat
+file incomplete and choose from the options displayed by the program output. The counting starts in 1.
 
-5) the wavelength value must be between [400, 750] nm, the values can be related or not with real filters
-values. If you choose to not use the filter half value, we suggest using wavelength values equally spaced
+5) the wavelength value must be between [400, 750] nm and the values can be related or not to real filters
+values. If you choose not to use the filter half value, we suggest to use wavelength values equally spaced
 like the example shown above.
 
-6) The background value is the fluorescence intensity to consider the event as a positive one for the channel.
+6)The background labeling corresponds to the maximum fluorescence value of negative events. Any positive event for a given channel must have superior fluorescence intensity, when compared with the background reference value.
 This value must be in agreement with the data.
 
-7) The traditional compensation table. The values must be between [0,100] and 100 for the channel with itself.
+7) The conventional compensation table. The values must be between [0,100] and the value 100 is set when the same channel is considered for both references.
 
 8) To calculate the color tendency for all the channels, set this value as zeros (one zero for each color channel) or
-complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). This way all the channels are taken into 
+complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). By doing this, all the channels are taken into 
 account to define the tendency color.
 
-To calculate the tendency only for events positive for a subset of channels type the corresponding channel numbers 
-followed by zeros, e.g. 2 4 0 0 0 0.  In this case only the double positives events for the second and fourth 
-channels will receive a color, all the other are going to stay black.
+To calculate the tendency value only for positive events for a subset of channels, type the corresponding channel numbers 
+followed by zeros, e.g. 2 4 0 0 0 0. In this case, only the double positives events for the second and fourth 
+channels will be considered and will receive a color, all the others are going to stay black.
 
-And to calculate the tendency for the negative events for a set of channels just put the number of channels
-as negative numerals, e.g 2 -4 0 0 0 0. With this configuration the events are going to receive a color if and only if
-they are positive for the second channel and negative for the fourth channel.
+To calculate the tendency value for negative events in a set of channels, just put the number of channels
+as negative numbers, e.g 2 -4 0 0 0 0. Using this configuration, the events are going to receive a color if and only if
+they are positive for the second channel and negative for the fourth channel (single positive events).
 
 
 
@@ -66,29 +65,28 @@ The cytometry files must be present in the same folder as the executable file.
 
 Dependencies:
 
-1 - This software was developed to run in Linux based systems;
+1 - This software was developed to run in Linux-based systems;
 2 - gfortran compiler;
 3 - gnuplot;
 4 - R compiler;
-5 - the R package flowcore;
+5 - the Bioconductor package flowcore;
 
 
 Files in this package:
 
-FCS2CSV.R -------------------------- R script that converts the FCS into the text format
-                                     used internally by the multiparametric-flow-cytometry.
+FCS2CSV.R -------------------------- R script that converts the FCS file into the text format,
+                                     used internally by the multiparametric-flow-cytometry application.
 Makefile --------------------------- compiles the code into the executable file.
 Sample_37.fcs ---------------------- It is one of the flow cytometry experimental data used
-                                     as example.
+                                     as example (control group of mice).
 Sample_39.fcs ---------------------- It is one of the flow cytometry experimental data used
-                                     as example.
-in.dat ----------------------------- The configuration file. The multiparametric-flow-cytometry
-                                     will make the color dot-plot according to this 
-                                     configurations such as FCS file, number of channels. 
-                                     This example uses the Sample_39.fcs as data source.
+                                     as example (infected group of mice).
+in.dat ----------------------------- This configuration file uses the Sample_39.fcs as data source. The multiparametric-flow-                                                cytometry application will generate the color dot-plot according to this 
+                                     configuration file. 
+                                     
 in_Sample_37.dat ------------------- Another example of configuration file, this time using 
-                                     the Sample_37.fcs file.
-multiparametric-flow-cytometry.f90 - The fortran program that makes the colored dot-plot.
+                                     the Sample_37.fcs as imput file.
+multiparametric-flow-cytometry.f90 - The fortran program that generates the colored dot-plot.
 multiparametric-flow-cytometry.pdf - The tutorial of the program.
 script-gnu-cor --------------------- Gnuplot script, this script uses the information in the 
                                      temporary files to generate the colored dot-plot.                                   
