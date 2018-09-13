@@ -73,18 +73,18 @@ Files in this package:
 
 FCS2CSV.R -------------------------- R script that converts the FCS file into the text format,
                                      used internally by the multiparametric-flow-cytometry application.
-Makefile --------------------------- compiles the code into the executable file.
-Sample_37.fcs ---------------------- It is one of the flow cytometry experimental data used
+Makefile --------------------------- Compiles the code into an executable file.
+Sample_37.fcs ---------------------- Flow cytometry experimental data used
                                      as example (control group of mice).
-Sample_39.fcs ---------------------- It is one of the flow cytometry experimental data used
+Sample_39.fcs ---------------------- Flow cytometry experimental data used
                                      as example (infected group of mice).
 in.dat ----------------------------- This configuration file uses the Sample_39.fcs as data source. 
                                      The multiparametric-flow-cytometry application will generate the color 
                                      dot-plot according to this configuration file.    
 in_Sample_37.dat ------------------- Another example of configuration file, this time using 
-                                     the Sample_37.fcs as imput file.
-multiparametric-flow-cytometry.f90 - The fortran program that generates the colored dot-plot.
-multiparametric-flow-cytometry.pdf - The tutorial of the program.
+                                     the Sample_37.fcs as input file.
+multiparametric-flow-cytometry.f90 - Fortran program that generates the colored dot-plot.
+multiparametric-flow-cytometry.pdf - Tutorial of the package.
 script-gnu-cor --------------------- Gnuplot script, this script uses the information in the 
                                      temporary files to generate the colored dot-plot.                                   
 script-gnu-pb ---------------------- Gnuplot script, this script generates the trust map 
