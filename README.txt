@@ -41,19 +41,16 @@ in.dat file incomplete and choose from the options displayed by the program outp
 4)The background labeling corresponds to the maximum fluorescence value of negative events. Any positive event for a given channel must have superior fluorescence intensity, when compared with the background reference value.
 This value must be in agreement with the data.
 
-5) The conventional compensation table. The values must be between [0,100] and the value 100 is set when the same channel is considered for both dimensions.
+5) The values of the conventional compensation table must be between [0,100] and the value 100 is set when the same channel is considered for both dimensions.
 
 6) To calculate the color tendency for all channels, set this value as zeros (one zero for each color channel) or
-complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). 
-By doing this, all the channels are taken into account to define the resultant color.
+complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). By doing this, all the channels are taken into account to define the resultant color.
 
 To calculate the resultant value only for positive events on a subset of channels, type the corresponding 
-channel numbers followed by zeros, e.g. 2 4 0 0 0 0. 
-In this case, only positives events for both the second and fourth channels will be considered and will receive a color, all others are going to stay black.
+channel numbers followed by zeros, e.g. 2 4 0 0 0 0. In this case, only positives events for both the second and fourth channels will be considered and will receive a color, all others are going to stay black.
 
 To calculate the resultant value for negative events in a set of channels, just put the number of channels
-as negative numbers, e.g 2 -4 0 0 0 0. 
-Using this configuration, the events are going to receive a color if and only if they are positive for the second channel and negative for the fourth channel (single positive events).
+as negative numbers, e.g 2 -4 0 0 0 0. Using this configuration, the events are going to receive a color if and only if they are positive for the second channel and negative for the fourth channel (single positive events).
 
 The cytometry files must be present in the same folder as the executable file.
 
