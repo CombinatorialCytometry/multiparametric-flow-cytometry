@@ -13,37 +13,37 @@ In a linux or MacOS terminal:
 
 #file information                                        example
 
-1) name of the fcs file                               Sample_38.fcs
-2) number of considered data columns in the fcs file  11
-3) number of fluorescent channels                     7
-4) columns to copy into memory                        1 5 6 7 9 10 11 12 13 14 15
+a) name of the fcs file                               Sample_38.fcs
+b) number of considered data columns in the fcs file  11
+c) number of fluorescent channels                     7
+d) columns to copy into memory                        1 5 6 7 9 10 11 12 13 14 15
 first the fsc, ssc and additional data (optional)
 after the fluorescence channels
-5) wavelength values for the channel colors           425 475 525 575 625 675 725
-6) Background values                                   20.4  1000.0  12.09  19.33  1000.0  24.01  12.53
-7) Compensation values                 100.00    1.63     6.10    0.00    0.70    0.00    0.00
+e) wavelength values for the channel colors           425 475 525 575 625 675 725
+f) Background values                                   20.4  1000.0  12.09  19.33  1000.0  24.01  12.53
+g) Compensation values                 100.00    1.63     6.10    0.00    0.70    0.00    0.00
                                         22.36  100.00     6.50    0.00    0.00    0.00    0.00
                                         13.82   29.27   100.00    6.84   37.41    0.00    0.00
                                          2.45   15.04    28.43  100.00   12.94    0.00    0.00
                                          0.00    2.44    10.84   15.73  100.00    0.00    8.74
                                          0.00    0.41     4.90    1.68    0.00  100.00   11.34
                                          0.00    0.00     0.00    0.00    0.00    6.10  100.00
-8) Fluorescent channels used in the color resultant calculation       0 0 0 0 0 0 0
+h) Fluorescent channels used in the color resultant calculation       0 0 0 0 0 0 0
 
 Helpful observations:
 The in.dat must have the above informations, in order;
 
-For itens 2, 3 and 4, to discover the number of columns of the fcs file, just execute the program with the 
+For itens b, c and d, to discover the number of columns of the fcs file, just execute the program with the 
 in.dat file incomplete and choose from the options displayed by the program output. The counting starts in 1.
 
-5) the wavelength values can be related or not to real filters values. 
+3) the wavelength values can be related or not to real filters values. 
 
-6)The background labeling corresponds to the maximum fluorescence value of negative events. Any positive event for a given channel must have superior fluorescence intensity, when compared with the background reference value.
+4)The background labeling corresponds to the maximum fluorescence value of negative events. Any positive event for a given channel must have superior fluorescence intensity, when compared with the background reference value.
 This value must be in agreement with the data.
 
-7) The conventional compensation table. The values must be between [0,100] and the value 100 is set when the same channel is considered for both dimensions.
+5) The conventional compensation table. The values must be between [0,100] and the value 100 is set when the same channel is considered for both dimensions.
 
-8) To calculate the color tendency for all channels, set this value as zeros (one zero for each color channel) or
+6) To calculate the color tendency for all channels, set this value as zeros (one zero for each color channel) or
 complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). 
 By doing this, all the channels are taken into account to define the resultant color.
 
