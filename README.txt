@@ -34,20 +34,22 @@ Helpful observations:
 The in.dat must have the above informations, in order;
 
 For itens b, c and d, to discover the number of columns of the fcs file, just execute the program with the 
-in.dat file incomplete and choose from the options displayed by the program output. The counting starts in 1.
+in.dat file incomplete and choose from the options displayed by the program output. The counting starts at 1.
 
-3) the wavelength values can be related or not to real filters values. 
+3) the wavelength values (item e) can be related or not to real filters values. 
+The multiparametric-flow-cytometry application automatically distributes colors evenly along the hue circle, 
+ordered according to the  wavelength values informed.
 
-4)The background labeling corresponds to the maximum fluorescence value of negative events. 
+4)The background labeling (item f) corresponds to the maximum fluorescence value of negative events. 
 Any positive event for a given channel must have superior fluorescence intensity, ]
 when compared with the background reference value.
 This value must be in agreement with the data.
 
-5) The values of the conventional compensation table must be between [0,100] 
-and the value 100 is set when the same channel is considered for both dimensions.
+5) The values of the conventional compensation table (item g) must be between [0,100] 
+and the value 100 is required when the same channel is considered for both dimensions.
 
 6) To calculate the color tendency for all channels, set this value as zeros 
-(one zero for each color channel) or
+(one zero for each color channel - see item h) or
 complete with the sequence according to the number of channels (e.g 1 2 3 4 5 6). 
 By doing this, all the channels are taken into account to define the resultant color.
 
